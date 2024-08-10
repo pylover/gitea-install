@@ -26,3 +26,8 @@ GITEA_SYSTEMD_SERVICEFILE=/etc/systemd/system/gitea.service
 
 # Nginx
 GITEA_DOMAIN=
+
+
+if [ -f $HERE/vars.user.sh ]; then
+  source $HERE/vars.user.sh
+fi

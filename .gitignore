@@ -1,6 +1,7 @@
 # Project specific
 dl
 deleteme.sh
+vars.*.sh
 
 # Vim
 .*.sw[op]
