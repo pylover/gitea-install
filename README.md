@@ -8,15 +8,10 @@ sudo apt install make dpkg-dev postgresql
 ```
 
 #### Postgres
-Edit `postgresql.conf` file and set 
+Edit `postgresql.conf` file and congiure to listen on unix domain socket only:
 ```bash
 listen_addresses = ''
 #port = 5432
-```
-
-Then, add this to your `pg_hba.conf`
-```bash
-host    gitea    gitea    127.0.0.1/32    scram-sha-256
 ```
 
 ## install

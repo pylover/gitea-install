@@ -83,8 +83,8 @@ fi
 # Prepare the dtabase
 read -p "Do you want to create and grant gitea db to gitea user? [Y/n] " 
 if [ -z $REPLY ] || [[ $REPLY =~ ^[Yy]$ ]]; then
-  sql CREATE ROLE gitea WITH LOGIN PASSWORD \'${GITEA_DBPASS}\'
-  sql CREATE DATABASE gitea WITH OWNER gitea TEMPLATE template0 \
+  sql CREATE ROLE ${GITEA_USER} WITH LOGIN PASSWORD \'${GITEA_DBPASS}\'
+  sql CREATE DATABASE gitea WITH OWNER ${GITEA_USER} TEMPLATE template0 \
     ENCODING UTF8 LC_COLLATE \'en_US.UTF-8\' LC_CTYPE \'en_US.UTF-8\'
 fi
 
