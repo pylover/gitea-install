@@ -46,7 +46,7 @@ fi
 
 
 # Create the gitea user
-if [ -z $(grep -P "^${GITEA_USER}" /etc/passwd) ]; then
+if [ -z "$(grep -P "^${GITEA_USER}" /etc/passwd)" ]; then
   adduser \
      --system \
      --shell /bin/bash \
