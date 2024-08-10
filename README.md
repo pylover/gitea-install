@@ -3,10 +3,9 @@ A set of scripts to install Gitea on Ubuntu server.
 
 
 ## install
-
-Run
-```
-install.sh
+```bash
+make clean  # to delete previous downloaded binaries
+make install
 ```
 
 to start an interactive installation of gitea.
