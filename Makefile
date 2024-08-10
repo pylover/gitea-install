@@ -7,6 +7,10 @@ install:
 	./install.sh
 
 
+.PHONY: post-install
+post-install:
+	./install.sh
+
 
 .PHONY: clean
 clean::
