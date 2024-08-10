@@ -24,5 +24,5 @@ fi
 gitea_download
 
 
-echo $GITEA_BINFILENAME
+echo $GITEA_BINFILE_NAME
 exit 0;
