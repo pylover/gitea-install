@@ -15,6 +15,8 @@ listen_addresses = ''
 ```
 
 ## install
+Create a `vars.user.sh` file (optional), then:
+
 ```bash
 make clean  # to delete previous downloaded binaries
 make install
