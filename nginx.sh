@@ -16,8 +16,8 @@ server {
     proxy_pass http://gitea_api;
   }
 }
-" > /etc/nginx/sites-available/${GITEA_DOMAIN}.conf
-  ln -s /etc/nginx/sites-available/${GITEA_DOMAIN}.conf \
-    /etc/nginx/sites-enabled/${GITEA_DOMAIN}.conf
+" > /etc/nginx/sites-available/${GITEA_DOMAIN}
+  ln -s /etc/nginx/sites-available/${GITEA_DOMAIN} \
+    /etc/nginx/sites-enabled/${GITEA_DOMAIN}
   service nginx restart
 }
