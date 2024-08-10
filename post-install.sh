@@ -36,10 +36,7 @@ fi
 # Systemd
 read -p "Do you want to create Systemd service and socket for Gitea? [Y/n] " 
 if [ -z $REPLY ] || [[ $REPLY =~ ^[Yy]$ ]]; then
-  systemctl is-active gitea.service \
-    && systemctl stop gitea.service
-  systemctl is-active gitea.socket \
-    && systemctl stop gitea.scoket
+  systemctl stop gitea.{socket,service}
   gitea_systemd_createunit
   systemctl daemon-reload
   systemctl enable gitea.{socket,service}
