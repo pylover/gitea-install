@@ -41,8 +41,9 @@ if [ -z $REPLY ] || [[ $REPLY =~ ^[Yy]$ ]]; then
   systemctl is-active gitea.socket \
     && systemctl stop gitea.scoket
   gitea_systemd_createunit
-  sudo systemctl enable gitea
-  sudo systemctl start gitea
+  systemctl daemon-reload
+  systemctl enable gitea.{socket,service}
+  systemctl start gitea.{socket,service}
 fi
 
 
