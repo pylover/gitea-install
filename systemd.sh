@@ -8,6 +8,9 @@ PartOf=gitea.service
 Service=gitea.service
 ListenStream=/var/run/gitea/gitea.sock
 NoDelay=true
+SocketMode=0666
+SocketUser=${GITEA_USER}
+SocketGroup=www-data
 
 [Install]
 WantedBy=sockets.target

@@ -55,7 +55,7 @@ done
 read -p "Do you want to install and configure Nginx [Y/n] " 
 if [ -z $REPLY ] || [[ $REPLY =~ ^[Yy]$ ]]; then
   apt install -y nginx
-  gite_nginx_configure
+  gitea_nginx_configure
 fi
 
 
