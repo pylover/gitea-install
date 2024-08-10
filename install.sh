@@ -93,6 +93,7 @@ read -p "Do you want to start the gitea web server? [Y/n] "
 if [ -z $REPLY ] || [[ $REPLY =~ ^[Yy]$ ]]; then
   echo "Starting Gitea temporary to configure, press CTRL+C after the \
   configuration process finished"
+  export GITEA_WORK_DIR=${GITEA_WORKINGDIR}
   sudo -u ${GITEA_USER} /usr/local/bin/gitea web \
     --config ${GITEA_CONFIGDIR}/app.ini
 fi
