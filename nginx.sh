@@ -7,7 +7,7 @@ upstream gitea_api {
 
 server {
   listen 80;
-  server_name ${DOMAIN};
+  server_name ${GITEA_DOMAIN};
 
   location / {
     proxy_set_header X-Forwarded-Host $host;

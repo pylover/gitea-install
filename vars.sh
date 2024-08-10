@@ -23,3 +23,6 @@ GITEA_USER=git
 # Systemd
 GITEA_SYSTEMD_SOCKETFILE=/etc/systemd/system/gitea.service
 GITEA_SYSTEMD_SERVICEFILE=/etc/systemd/system/gitea.service
+
+# Nginx
+GITEA_DOMAIN=

@@ -42,10 +42,15 @@ if [ -z $REPLY ] || [[ $REPLY =~ ^[Yy]$ ]]; then
 fi
 
 
+while [ -z ${GITEA_DOMAIN} ]; do
+  read -p "Please enter a domain name: "  GITEA_DOMAIN
+done
+
+
 # Nginx
 read -p "Do you want to install and configure Nginx [Y/n] " 
 if [ -z $REPLY ] || [[ $REPLY =~ ^[Yy]$ ]]; then
-  apt install nginx
+  apt install -y nginx
   gite_nginx_configure
 fi
 
