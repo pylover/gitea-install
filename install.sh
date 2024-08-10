@@ -90,7 +90,8 @@ fi
 
 echo "Starting Gitea temporary to configure, press CTRL+C after the \
 configuration process finished"
-/usr/local/bin/gitea web --config ${GITEA_CONFIGDIR}/app.ini
+sudo -u ${GITEA_USER} /usr/local/bin/gitea web \
+  --config ${GITEA_CONFIGDIR}/app.ini
 
 echo "Run ./post-install.sh"
 
