@@ -1,4 +1,4 @@
-function gitea_ensurechecksum () {
+gitea_binfile_verify () {
   echo "Checking Gitea binary file's checksum..."
   if [ ! -f ${GITEA_BINFILE_CHKSUMFILE} ]; then
     gpg -q --keyserver ${GITEA_GPGKEYSERVER} --recv ${GITEA_GPGKEYID}
@@ -10,15 +10,7 @@ function gitea_ensurechecksum () {
 }
 
 
-function gitea_download () {
-  if [ -f ${GITEA_BINFILE_LOCAL} ]; then
-    gitea_ensurechecksum || rm ${GITEA_BINFILE_LOCAL}*
-  fi
-
-  if [ ! -f ${GITEA_BINFILE_LOCAL} ]; then
-    mkdir -p ${DLDIR}
-    echo "Downloading Gitea binary..."
-    wget --directory-prefix ${DLDIR} ${GITEA_DLURL}
-    gitea_ensurechecksum || exit 1
-  fi
+function gitea_binfile_download () {
+  echo "Downloading Gitea binary..."
+  wget --directory-prefix ${DLDIR} ${GITEA_DLURL}
 }
