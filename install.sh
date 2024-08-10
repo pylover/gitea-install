@@ -98,7 +98,7 @@ if [ -z $REPLY ] || [[ $REPLY =~ ^[Yy]$ ]]; then
     /usr/local/bin/gitea web --config ${GITEA_CONFIGDIR}/app.ini
 fi
 
-echo "Run ./post-install.sh"
+echo "Run: make post-install"
 
 
 exit 0;

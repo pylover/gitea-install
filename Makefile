@@ -9,7 +9,7 @@ install:
 
 .PHONY: post-install
 post-install:
-	./install.sh
+	./post-install.sh
 
 
 .PHONY: clean
