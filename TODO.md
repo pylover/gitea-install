@@ -1,1 +1,2 @@
 - all TODOs and FIXMEs
+- make uninstall

@@ -3,9 +3,13 @@
 
 source ./common.sh
 source ./vars.sh
-source ./download.sh
 source ./systemd.sh
 source ./nginx.sh
+
+
+# Fixing configuration directory and file permissions
+chmod 750 ${GITEA_CONFIGDIR}
+chmod 640 ${GITEA_CONFIGDIR}/app.ini
 
 
 # Check the shell

@@ -4,8 +4,6 @@
 source ./common.sh
 source ./vars.sh
 source ./download.sh
-source ./systemd.sh
-source ./nginx.sh
 
 
 # Check the shell
@@ -61,12 +59,6 @@ fi
 
 
 # Create required directory structure
-# TODO: /etc/gitea is temporarily set with write permissions for user 
-# ${GITEA_USER} so that the web installer can write the configuration file. 
-# After the installation is finished, it is recommended to set permissions to 
-# read-only using:
-#   chmod 750 /etc/gitea
-#   chmod 640 /etc/gitea/app.ini
 mkdir -p ${GITEA_WORKINGDIR}/{custom,data,log}
 chown -R ${GITEA_USER}:${GITEA_USER} ${GITEA_WORKINGDIR}
 chmod -R 750 ${GITEA_WORKINGDIR}
@@ -85,6 +77,15 @@ read -p "Do you want to enable bash auto-completion for Gitea? [Y/n] "
 if [ -z $REPLY ] || [[ $REPLY =~ ^[Yy]$ ]]; then
   curl ${GITEA_BASHAUTOCOMPLETIONSCRIPT} \
     > /usr/share/bash-completion/completions/gitea
+fi
+
+
+# Prepare the dtabase
+read -p "Do you want to create and grant gitea db to gitea user? [Y/n] " 
+if [ -z $REPLY ] || [[ $REPLY =~ ^[Yy]$ ]]; then
+  sql CREATE ROLE gitea WITH LOGIN PASSWORD 'gitea'
+  sql CREATE DATABASE gitea WITH OWNER gitea TEMPLATE template0 \
+    ENCODING UTF8 LC_COLLATE 'en_US.UTF-8' LC_CTYPE 'en_US.UTF-8'
 fi
 
 
