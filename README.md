@@ -8,7 +8,13 @@ sudo apt install make dpkg-dev postgresql
 ```
 
 #### Postgres
-Add this to your `pg_hba.conf`
+Edit `postgresql.conf` file and set 
+```bash
+listen_addresses = ''
+#port = 5432
+```
+
+Then, add this to your `pg_hba.conf`
 ```bash
 host    gitea    gitea    127.0.0.1/32    scram-sha-256
 ```
