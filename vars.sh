@@ -18,7 +18,7 @@ GITEA_WORKINGDIR=/var/lib/gitea
 GITEA_CONFIGDIR=/etc/gitea
 GITEA_BASHAUTOCOMPLETIONSCRIPT=https://raw.githubusercontent.com/go-gitea/gitea/main/contrib/autocompletion/bash_autocomplete
 GITEA_USER=git
-
+GITEA_DBPASS=gitea
 
 # Systemd
 GITEA_SYSTEMD_SOCKETFILE=/etc/systemd/system/gitea.service
