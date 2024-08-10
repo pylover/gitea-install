@@ -57,4 +57,12 @@ if [ -z $REPLY ] || [[ $REPLY =~ ^[Yy]$ ]]; then
 fi
 
 
+# SSL
+read -p "Do you want to install and enable certbot [Y/n] " 
+if [ -z $REPLY ] || [[ $REPLY =~ ^[Yy]$ ]]; then
+  apt install -y certbot
+  sudo certbot --nginx -d ${GITEA_DOMAIN}
+fi
+
+
 exit 0;
