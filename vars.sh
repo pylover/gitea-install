@@ -21,7 +21,7 @@ GITEA_USER=git
 GITEA_DBPASS=gitea
 
 # Systemd
-GITEA_SYSTEMD_SOCKETFILE=/etc/systemd/system/gitea.service
+GITEA_SYSTEMD_SOCKETFILE=/etc/systemd/system/gitea.socket
 GITEA_SYSTEMD_SERVICEFILE=/etc/systemd/system/gitea.service
 
 # Nginx
