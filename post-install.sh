@@ -60,7 +60,7 @@ fi
 # SSL
 read -p "Do you want to install and enable certbot [Y/n] " 
 if [ -z $REPLY ] || [[ $REPLY =~ ^[Yy]$ ]]; then
-  apt install -y certbot
+  apt install -y certbot python3-certbot-nginx
   sudo certbot --nginx -d ${GITEA_DOMAIN}
 fi
 
