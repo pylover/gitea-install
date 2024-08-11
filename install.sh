@@ -72,6 +72,7 @@ fi
 read -p "Do you want to create ${GITEA_CONFIGDIR}/app.ini? [Y/n] " 
 if [ -z $REPLY ] || [[ $REPLY =~ ^[Yy]$ ]]; then
   gitea_config_create
+  chown root:${GITEA_USER} ${GITEA_CONFIGDIR}/app.ini
   chmod 640 ${GITEA_CONFIGDIR}/app.ini
 fi
 
