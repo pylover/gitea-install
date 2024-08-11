@@ -1,7 +1,7 @@
 gitea_nginx_configure () {
   echo "\
 upstream gitea_api {
-  server unix:/run/gitea.sock fail_timeout=1;
+  server unix:/run/gitea/gitea.sock fail_timeout=1;
 }
 
 

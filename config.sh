@@ -30,7 +30,7 @@ ROOT = ${GITEA_WORKINGDIR}/data/gitea-repositories
 [server]
 PROTOCOL = http+unix
 UNIX_SOCKET_PERMISSION = 666
-HTTP_ADDR=/run/gitea.sock
+HTTP_ADDR=/run/gitea/gitea.sock
 SSH_DOMAIN = ${GITEA_DOMAIN}
 DOMAIN = ${GITEA_DOMAIN}
 ROOT_URL = https://${GITEA_DOMAIN}/
