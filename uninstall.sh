@@ -31,6 +31,7 @@ sql DROP ROLE ${GITEA_USER}
 
 # Delete directory structure
 rm -rf ${GITEA_WORKINGDIR}/{custom,data,log}
+rmdir ${GITEA_WORKINGDIR}
 rm -rf ${GITEA_CONFIGDIR}
 
 

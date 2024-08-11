@@ -3,7 +3,7 @@ gitea_config_create () {
   local JWT_SECRET=`gitea generate secret JWT_SECRET`
   local INTERNAL_TOKEN=`gitea generate secret JWT_SECRET`
 
-  while [ -z ${APP_NAME} ]; do
+  while [ -z "${APP_NAME}" ]; do
     read -p "Please enter title for the website: "  APP_NAME
   done
 
