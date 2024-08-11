@@ -25,8 +25,8 @@ systemctl disable gitea.{socket,service}
 
 
 # delete database and role
-sql DROP ROLE ${GITEA_USER} 
 sql DROP DATABASE gitea 
+sql DROP ROLE ${GITEA_USER} 
 
 
 # Delete directory structure
