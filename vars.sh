@@ -28,6 +28,10 @@ GITEA_SYSTEMD_SERVICEFILE=/etc/systemd/system/gitea.service
 GITEA_DOMAIN=
 
 
+# Personalization
+APP_NAME=
+
+
 if [ -f $HERE/vars.user.sh ]; then
   source $HERE/vars.user.sh
 fi

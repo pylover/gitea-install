@@ -22,8 +22,6 @@ Description=Gitea (Git with a cup of tea)
 After=network.target
 Wants=postgresql.service
 After=postgresql.service
-Wants=redis.service
-After=redis.service
 After=gitea.socket
 Requires=gitea.socket
 

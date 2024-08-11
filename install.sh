@@ -4,6 +4,9 @@
 source ./common.sh
 source ./vars.sh
 source ./download.sh
+source ./config.sh
+source ./systemd.sh
+source ./nginx.sh
 
 
 # Check the shell
@@ -30,7 +33,7 @@ fi
 # Dependencies
 read -p "Do you want to install required debian packages? [Y/n] " 
 if [ -z $REPLY ] || [[ $REPLY =~ ^[Yy]$ ]]; then
-  apt-get install -y wget git postgresql redis-server
+  apt-get install -y wget git
 fi
 
 
@@ -64,7 +67,7 @@ chown -R ${GITEA_USER}:${GITEA_USER} ${GITEA_WORKINGDIR}
 chmod -R 750 ${GITEA_WORKINGDIR}
 mkdir -p ${GITEA_CONFIGDIR}
 chown root:${GITEA_USER} ${GITEA_CONFIGDIR}
-chmod 770 ${GITEA_CONFIGDIR}
+chmod 750 ${GITEA_CONFIGDIR}
 
 
 # Copy the Gitea binary to a global location
@@ -89,16 +92,44 @@ if [ -z $REPLY ] || [[ $REPLY =~ ^[Yy]$ ]]; then
 fi
 
 
-read -p "Do you want to start the gitea web server? [Y/n] " 
+# Gitea configuration
+read -p "Do you want to create ${GITEA_CONFIGDIR}/app.ini? [Y/n] " 
 if [ -z $REPLY ] || [[ $REPLY =~ ^[Yy]$ ]]; then
-  echo "Starting Gitea temporary to configure, press CTRL+C after the \
-  configuration process finished"
-  cd ${GITEA_WORKINGDIR}
-  sudo -u ${GITEA_USER} GITEA_WORK_DIR=${GITEA_WORKINGDIR} \
-    /usr/local/bin/gitea web --config ${GITEA_CONFIGDIR}/app.ini
+  gitea_config_create
+  chmod 640 ${GITEA_CONFIGDIR}/app.ini
 fi
 
-echo "Run: make post-install"
+
+# Systemd
+read -p "Do you want to create Systemd service and socket for Gitea? [Y/n] " 
+if [ -z $REPLY ] || [[ $REPLY =~ ^[Yy]$ ]]; then
+  systemctl stop gitea.{socket,service}
+  gitea_systemd_createunit
+  systemctl daemon-reload
+  systemctl enable gitea.{socket,service}
+  systemctl start gitea.{socket,service}
+fi
 
 
-exit 0;
+# Nginx
+read -p "Do you want to install and configure Nginx [Y/n] " 
+if [ -z $REPLY ] || [[ $REPLY =~ ^[Yy]$ ]]; then
+  apt install -y nginx
+  
+  while [ -z ${GITEA_DOMAIN} ]; do
+    read -p "Please enter a domain name: "  GITEA_DOMAIN
+  done
+  
+  gitea_nginx_configure
+
+  # SSL
+  read -p "Do you want to install and enable certbot [Y/n] " 
+  if [ -z $REPLY ] || [[ $REPLY =~ ^[Yy]$ ]]; then
+    apt install -y certbot python3-certbot-nginx
+    sudo certbot --nginx -d ${GITEA_DOMAIN}
+  fi
+fi
+
+
+APP_URL=https://${GITEA_DOMAIN}/
+echo "Bingo! Gitea webserver successfully hosted on: ${APP_URL}"
