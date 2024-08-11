@@ -14,8 +14,8 @@ validate
 
 
 # stop services
-systemctl stop gitea.{socket,service}
-systemctl disable gitea.{socket,service}
+systemctl stop gitea.service
+systemctl disable gitea.service
 
 
 # TODO: Backup /home/git
@@ -44,7 +44,6 @@ rm /usr/share/bash-completion/completions/gitea
 
 
 # delete systemd service and socket
-rm ${GITEA_SYSTEMD_SOCKETFILE}
 rm ${GITEA_SYSTEMD_SERVICEFILE}
 systemctl daemon-reload
 

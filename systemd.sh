@@ -1,29 +1,10 @@
 gitea_systemd_createunit () {
   echo "\
 [Unit]
-Description=Gitea Web Socket
-PartOf=gitea.service
-
-[Socket]
-Service=gitea.service
-ListenStream=/var/run/gitea/gitea.sock
-NoDelay=true
-SocketMode=0666
-SocketUser=${GITEA_USER}
-SocketGroup=www-data
-
-[Install]
-WantedBy=sockets.target
-" > ${GITEA_SYSTEMD_SOCKETFILE}
-
-  echo "\
-[Unit]
 Description=Gitea (Git with a cup of tea)
 After=network.target
 Wants=postgresql.service
 After=postgresql.service
-After=gitea.socket
-Requires=gitea.socket
 
 [Service]
 # LimitNOFILE=4096:4096
