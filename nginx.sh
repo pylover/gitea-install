@@ -19,5 +19,4 @@ server {
 " > /etc/nginx/sites-available/${GITEA_DOMAIN}
   ln -s /etc/nginx/sites-available/${GITEA_DOMAIN} \
     /etc/nginx/sites-enabled/${GITEA_DOMAIN}
-  service nginx restart
 }
