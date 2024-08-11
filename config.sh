@@ -28,7 +28,8 @@ LOG_SQL = false
 ROOT = ${GITEA_WORKINGDIR}/data/gitea-repositories
 
 [server]
-PROTOCOL=http+unix
+PROTOCOL = http+unix
+UNIX_SOCKET_PERMISSION = 666
 HTTP_ADDR=/run/gitea.sock
 SSH_DOMAIN = ${GITEA_DOMAIN}
 DOMAIN = ${GITEA_DOMAIN}

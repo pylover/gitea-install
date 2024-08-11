@@ -14,6 +14,8 @@ User=${GITEA_USER}
 Group=${GITEA_USER}
 WorkingDirectory=${GITEA_WORKINGDIR}
 RuntimeDirectory=gitea
+ExecStartPre=mkdir -p /run/gitea
+ExecStartPre=chown -R ${GITEA_USER}:www-data /run/gitea
 ExecStart=/usr/local/bin/gitea web --config ${GITEA_CONFIGDIR}/app.ini
 Restart=always
 Environment=USER=${GITEA_USER} 
