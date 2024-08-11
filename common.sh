@@ -29,7 +29,7 @@ validate () {
     exit 1
   fi
   
-  while [ -z ${GITEA_DOMAIN} ]; do
+  while [ -z "${GITEA_DOMAIN}" ]; do
     read -p "Please enter a domain name: " GITEA_DOMAIN
   done
 }
