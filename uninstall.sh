@@ -64,7 +64,6 @@ if [ -n "$(grep -P "^${GITEA_USER}" /etc/passwd)" ]; then
   deluser \
      --system \
      --remove-home \
-     --remove-all-files \
      ${GITEA_USER}
 fi
 
