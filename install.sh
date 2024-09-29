@@ -14,9 +14,9 @@ validate
 
 
 # Set proxy if any
-if [ -z "${PROXY}" ]; then
-  export http_proxy="${PROXY}"
-  export https_proxy="${PROXY}"
+if [ -z "${SOCKS5_PROXY}" ]; then
+  export http_proxy="${SOCKS5_PROXY}"
+  export https_proxy="${SOCKS5_PROXY}"
 fi
 
 

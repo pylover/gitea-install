@@ -33,7 +33,7 @@ APP_NAME=
 
 
 # Network
-PROXY=
+SOCKS5_PROXY=
 
 
 if [ -f $HERE/vars.user.sh ]; then
