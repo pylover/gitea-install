@@ -15,7 +15,7 @@ validate
 
 # Set proxy if any
 if [ -z "${SOCKS5_PROXY}" ]; then
-  export socks_proxy="scoks5://${SOCKS5_PROXY}"
+  export socks_proxy="socks5://${SOCKS5_PROXY}"
 fi
 
 
