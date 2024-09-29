@@ -13,6 +13,13 @@ source ./nginx.sh
 validate
 
 
+# Set proxy if any
+if [ -z "${PROXY}" ]; then
+  export http_proxy="${PROXY}"
+  export https_proxy="${PROXY}"
+fi
+
+
 # Downloading the specific binary if required
 if [ -f ${GITEA_BINFILE_LOCAL} ]; then
   gitea_binfile_verify || rm ${GITEA_BINFILE_LOCAL}*

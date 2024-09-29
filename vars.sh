@@ -23,12 +23,17 @@ GITEA_DBPASS=gitea
 # Systemd
 GITEA_SYSTEMD_SERVICEFILE=/etc/systemd/system/gitea.service
 
+
 # Nginx
 GITEA_DOMAIN=
 
 
 # Personalization
 APP_NAME=
+
+
+# Network
+PROXY=
 
 
 if [ -f $HERE/vars.user.sh ]; then
