@@ -26,6 +26,7 @@ LOG_SQL = false
 
 [repository]
 ROOT = ${GITEA_WORKINGDIR}/data/gitea-repositories
+DEFAULT_BRANCH = master
 
 [server]
 PROTOCOL = http+unix
