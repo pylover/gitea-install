@@ -1,3 +1,2 @@
-- create admin user
 - all TODOs and FIXMEs
 - make uninstall

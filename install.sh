@@ -14,7 +14,7 @@ validate
 
 
 # Set proxy if any
-if [ -z "${SOCKS5_PROXY}" ]; then
+if [ -n "${SOCKS5_PROXY}" ]; then
   export socks_proxy="socks5://${SOCKS5_PROXY}"
 fi
 
@@ -53,8 +53,8 @@ chmod 750 ${GITEA_CONFIGDIR}
 
 
 # Copy the Gitea binary to a global location
-cp ${GITEA_BINFILE_LOCAL} /usr/local/bin/gitea
-chmod +x /usr/local/bin/gitea
+cp ${GITEA_BINFILE_LOCAL} ${GITEA_BIN}
+chmod +x ${GITEA_BIN}
 
 
 # Enabling Gitea bash autocompletion (from 1.19)
@@ -75,11 +75,23 @@ fi
 
 
 # Gitea configuration
-read -p "Do you want to create ${GITEA_CONFIGDIR}/app.ini? [Y/n] " 
+read -p "Do you want to create ${GITEA_CONFIGFILE}? [Y/n] " 
 if [ -z $REPLY ] || [[ $REPLY =~ ^[Yy]$ ]]; then
   gitea_config_create
-  chown root:${GITEA_USER} ${GITEA_CONFIGDIR}/app.ini
-  chmod 640 ${GITEA_CONFIGDIR}/app.ini
+  chown root:${GITEA_USER} ${GITEA_CONFIGFILE}
+  chmod 640 ${GITEA_CONFIGFILE}
+fi
+
+
+# Gitea admin user
+if [ -n "${APP_ADMINUSER}" ] && [ -n "${APP_ADMINPASS}" ] \
+    && [ -n "${APP_ADMINEMAIL}" ]; then
+  sudo -u ${GITEA_USER} ${GITEA_BIN} -c ${GITEA_CONFIGFILE} \
+    admin user create \
+    --admin \
+    --username ${APP_ADMINUSER} \
+    --email ${APP_ADMINEMAIL} \
+    --password ${APP_ADMINPASS}
 fi
 
 

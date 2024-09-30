@@ -16,9 +16,12 @@ GITEA_GPGKEYID=7C9E68152594688862D62AF62D9AE806EC1592E2
 GITEA_GPGKEYSERVER=keys.openpgp.org
 GITEA_WORKINGDIR=/var/lib/gitea
 GITEA_CONFIGDIR=/etc/gitea
+GITEA_CONFIGFILE=${GITEA_CONFIGDIR}/app.ini
 GITEA_BASHAUTOCOMPLETIONSCRIPT=https://raw.githubusercontent.com/go-gitea/gitea/main/contrib/autocompletion/bash_autocomplete
 GITEA_USER=git
 GITEA_DBPASS=gitea
+GITEA_BIN=/usr/local/bin/gitea
+
 
 # Systemd
 GITEA_SYSTEMD_SERVICEFILE=/etc/systemd/system/gitea.service
@@ -30,6 +33,9 @@ GITEA_DOMAIN=
 
 # Personalization
 APP_NAME=
+APP_ADMINUSER=
+APP_ADMINEMAIL=
+APP_ADMINPASS=
 
 
 # Network
