@@ -1,4 +1,8 @@
 gitea_binfile_verify () {
+  if [[ "${GITEA_BINFILE_VERIFY}" != "yes" ]]; then
+    return 0
+  fi
+
   echo "Checking Gitea binary file's checksum..."
   if [ ! -f ${GITEA_BINFILE_CHKSUMFILE} ]; then
     gpg -q --keyserver ${GITEA_GPGKEYSERVER} --recv ${GITEA_GPGKEYID}
