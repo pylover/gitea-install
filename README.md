@@ -18,6 +18,7 @@ APP_ADMINPASS=strongpassword
 
 # Optional
 SOCKS5_PROXY=localhost:8080
+GITEA_BINFILE_VERIFY=no
 ```
 
 Then:
