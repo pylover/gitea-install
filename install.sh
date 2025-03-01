@@ -7,6 +7,7 @@ source ./download.sh
 source ./config.sh
 source ./systemd.sh
 source ./nginx.sh
+source ./postgresql.sh
 
 
 # Validate the environment
