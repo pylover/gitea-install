@@ -74,6 +74,7 @@ if [ -z $REPLY ] || [[ $REPLY =~ ^[Yy]$ ]]; then
   sql CREATE DATABASE ${GITEA_DBNAME} WITH OWNER ${GITEA_USER} \
     TEMPLATE template0 ENCODING UTF8 LC_COLLATE \'en_US.UTF-8\' \
     LC_CTYPE \'en_US.UTF-8\'
+  sudo -u ${GITEA_USER} ${GITEA_BIN} -c ${GITEA_CONFIGFILE} migrate
 fi
 
 
@@ -101,6 +102,7 @@ fi
 # Systemd
 read -p "Do you want to create Systemd service for Gitea? [Y/n] " 
 if [ -z $REPLY ] || [[ $REPLY =~ ^[Yy]$ ]]; then
+  mkdir -p `dirname ${GITEA_SYSTEMD_SERVICEFILE}`
   systemctl stop ${GITEA_SYSTEMD_SERVICEFILE}
   gitea_systemd_createunit
   systemctl daemon-reload

@@ -44,7 +44,7 @@ rm -r /home/${GITEA_USER}/.local/share/bash-completion/completions/gitea
 
 
 # delete systemd service and socket
-rm ${GITEA_SYSTEMD_SERVICEFILE}
+rm -r ${GITEA_SYSTEMD_SERVICEFILE}
 systemctl daemon-reload
 
 
