@@ -50,6 +50,7 @@ chmod -R 750 ${GITEA_WORKINGDIR}
 mkdir -p ${GITEA_CONFIGDIR}
 chown root:${GITEA_USER} ${GITEA_CONFIGDIR}
 chmod 750 ${GITEA_CONFIGDIR}
+chmod +x /home/${GITEA_USER}
 
 
 # Copy the Gitea binary to a global location
@@ -103,11 +104,11 @@ fi
 read -p "Do you want to create Systemd service for Gitea? [Y/n] " 
 if [ -z $REPLY ] || [[ $REPLY =~ ^[Yy]$ ]]; then
   mkdir -p `dirname ${GITEA_SYSTEMD_SERVICEFILE}`
-  systemctl stop ${GITEA_SYSTEMD_SERVICEFILE}
+  systemctl stop gitea
   gitea_systemd_createunit
   systemctl daemon-reload
   systemctl enable ${GITEA_SYSTEMD_SERVICEFILE}
-  systemctl start ${GITEA_SYSTEMD_SERVICEFILE}
+  systemctl start gitea
 fi
 
 
