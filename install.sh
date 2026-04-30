@@ -53,7 +53,7 @@ chmod 750 ${GITEA_CONFIGDIR}
 
 
 # Copy the Gitea binary to a global location
-mkdir -p ${GITEA_BIN}
+mkdir -p `dirname ${GITEA_BIN}`
 cp ${GITEA_BINFILE_LOCAL} ${GITEA_BIN}
 chmod +x ${GITEA_BIN}
 
