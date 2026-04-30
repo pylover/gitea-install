@@ -67,6 +67,15 @@ if [ -z $REPLY ] || [[ $REPLY =~ ^[Yy]$ ]]; then
 fi
 
 
+# Gitea configuration
+read -p "Do you want to create ${GITEA_CONFIGFILE}? [Y/n] " 
+if [ -z $REPLY ] || [[ $REPLY =~ ^[Yy]$ ]]; then
+  gitea_config_create
+  chown root:${GITEA_USER} ${GITEA_CONFIGFILE}
+  chmod 640 ${GITEA_CONFIGFILE}
+fi
+
+
 # Prepare the dtabase
 read -p "Do you want to create and grant db to ${GITEA_USER} user? [Y/n] " 
 if [ -z $REPLY ] || [[ $REPLY =~ ^[Yy]$ ]]; then
@@ -75,15 +84,6 @@ if [ -z $REPLY ] || [[ $REPLY =~ ^[Yy]$ ]]; then
     TEMPLATE template0 ENCODING UTF8 LC_COLLATE \'en_US.UTF-8\' \
     LC_CTYPE \'en_US.UTF-8\'
   sudo -u ${GITEA_USER} ${GITEA_BIN} -c ${GITEA_CONFIGFILE} migrate
-fi
-
-
-# Gitea configuration
-read -p "Do you want to create ${GITEA_CONFIGFILE}? [Y/n] " 
-if [ -z $REPLY ] || [[ $REPLY =~ ^[Yy]$ ]]; then
-  gitea_config_create
-  chown root:${GITEA_USER} ${GITEA_CONFIGFILE}
-  chmod 640 ${GITEA_CONFIGFILE}
 fi
 
 
