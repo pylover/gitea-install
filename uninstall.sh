@@ -36,7 +36,7 @@ rm -rf ${GITEA_CONFIGDIR}
 
 
 # delete binary
-rm ${GITEA_BIN}
+rm -r ${GITEA_BIN}
 
 
 # delete autocompletion
