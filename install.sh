@@ -63,7 +63,7 @@ read -p "Do you want to enable bash auto-completion for Gitea? [Y/n] "
 if [ -z $REPLY ] || [[ $REPLY =~ ^[Yy]$ ]]; then
   cmpdir=/home/${GITEA_USER}/.local/share/bash-completion/completions
   mkdir -p ${cmpdir}
-  curl ${GITEA_BASHAUTOCOMPLETIONSCRIPT} > ${cmpdir}
+  curl ${GITEA_BASHAUTOCOMPLETIONSCRIPT} > ${cmpdir}/gitea
 fi
 
 
