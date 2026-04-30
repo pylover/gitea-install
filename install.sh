@@ -60,8 +60,9 @@ chmod +x ${GITEA_BIN}
 # Enabling Gitea bash autocompletion (from 1.19)
 read -p "Do you want to enable bash auto-completion for Gitea? [Y/n] " 
 if [ -z $REPLY ] || [[ $REPLY =~ ^[Yy]$ ]]; then
-  curl ${GITEA_BASHAUTOCOMPLETIONSCRIPT} \
-    > /home/${GITEA_USER}/share/bash-completion/completions/gitea
+  cmpdir=/home/${GITEA_USER}/.local/share/bash-completion/completions
+  mkdir -p ${cmpdir}
+  curl ${GITEA_BASHAUTOCOMPLETIONSCRIPT} > ${cmpdir}
 fi
 
 

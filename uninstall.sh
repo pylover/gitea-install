@@ -40,7 +40,7 @@ rm ${GITEA_BIN}
 
 
 # delete autocompletion
-rm /home/${GITEA_USER}/share/bash-completion/completions/gitea
+rm -r /home/${GITEA_USER}/.local/share/bash-completion/completions/gitea
 
 
 # delete systemd service and socket
