@@ -1,7 +1,7 @@
 gitea_config_create () {
-  local LFS_JWT_SECRET=`gitea generate secret LFS_JWT_SECRET`
-  local JWT_SECRET=`gitea generate secret JWT_SECRET`
-  local INTERNAL_TOKEN=`gitea generate secret INTERNAL_TOKEN`
+  local LFS_JWT_SECRET=`${GITEA_BIN} generate secret LFS_JWT_SECRET`
+  local JWT_SECRET=`${GITEA_BIN} generate secret JWT_SECRET`
+  local INTERNAL_TOKEN=`${GITEA_BIN} generate secret INTERNAL_TOKEN`
 
   while [ -z "${APP_NAME}" ]; do
     read -p "Please enter title for the website: "  APP_NAME
@@ -16,22 +16,22 @@ RUN_MODE = prod
 [database]
 DB_TYPE = postgres
 HOST = /run/postgresql/
-NAME = gitea
+NAME = ${GITEA_DBNAME}
 USER = ${GITEA_USER}
 PASSWD = ${GITEA_DBPASS}
 SCHEMA = 
 SSL_MODE = disable
-PATH = ${GITEA_WORKINGDIR}/data/gitea.db
+PATH = ${GITEA_WORKINGDIR}/data/${GITEA_DBNAME}.db
 LOG_SQL = false
 
 [repository]
-ROOT = ${GITEA_WORKINGDIR}/data/gitea-repositories
+ROOT = ${GITEA_WORKINGDIR}/data/repositories
 DEFAULT_BRANCH = master
 
 [server]
 PROTOCOL = http+unix
 UNIX_SOCKET_PERMISSION = 666
-HTTP_ADDR=/run/gitea/gitea.sock
+HTTP_ADDR=${GITEA_WORKINGDIR}/gitea.sock
 SSH_DOMAIN = ${GITEA_DOMAIN}
 DOMAIN = ${GITEA_DOMAIN}
 ROOT_URL = https://${GITEA_DOMAIN}/
@@ -88,5 +88,5 @@ PASSWORD_HASH_ALGO = pbkdf2
 
 [oauth2]
 JWT_SECRET = ${JWT_SECRET}
-" > ${GITEA_CONFIGDIR}/app.ini
+" > ${GITEA_CONFIGFILE}
 }

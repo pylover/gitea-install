@@ -30,7 +30,7 @@ if [ ! -f ${GITEA_BINFILE_LOCAL} ]; then
 fi
 
 
-# Create the gitea user
+# Create the user
 if [ -z "$(grep -P "^${GITEA_USER}" /etc/passwd)" ]; then
   adduser \
      --system \
@@ -61,7 +61,7 @@ chmod +x ${GITEA_BIN}
 read -p "Do you want to enable bash auto-completion for Gitea? [Y/n] " 
 if [ -z $REPLY ] || [[ $REPLY =~ ^[Yy]$ ]]; then
   curl ${GITEA_BASHAUTOCOMPLETIONSCRIPT} \
-    > /usr/share/bash-completion/completions/gitea
+    > /home/${GITEA_USER}/share/bash-completion/completions/gitea
 fi
 
 
@@ -69,8 +69,9 @@ fi
 read -p "Do you want to create and grant db to ${GITEA_USER} user? [Y/n] " 
 if [ -z $REPLY ] || [[ $REPLY =~ ^[Yy]$ ]]; then
   sql CREATE ROLE ${GITEA_USER} WITH LOGIN PASSWORD \'${GITEA_DBPASS}\'
-  sql CREATE DATABASE gitea WITH OWNER ${GITEA_USER} TEMPLATE template0 \
-    ENCODING UTF8 LC_COLLATE \'en_US.UTF-8\' LC_CTYPE \'en_US.UTF-8\'
+  sql CREATE DATABASE ${GITEA_DBNAME} WITH OWNER ${GITEA_USER} \
+    TEMPLATE template0 ENCODING UTF8 LC_COLLATE \'en_US.UTF-8\' \
+    LC_CTYPE \'en_US.UTF-8\'
 fi
 
 
@@ -98,11 +99,11 @@ fi
 # Systemd
 read -p "Do you want to create Systemd service for Gitea? [Y/n] " 
 if [ -z $REPLY ] || [[ $REPLY =~ ^[Yy]$ ]]; then
-  systemctl stop gitea.service
+  systemctl stop ${GITEA_SYSTEMD_SERVICEFILE}
   gitea_systemd_createunit
   systemctl daemon-reload
-  systemctl enable gitea.service
-  systemctl start gitea.service
+  systemctl enable ${GITEA_SYSTEMD_SERVICEFILE}
+  systemctl start ${GITEA_SYSTEMD_SERVICEFILE}
 fi
 
 

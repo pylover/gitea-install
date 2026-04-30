@@ -14,18 +14,18 @@ validate
 
 
 # stop services
-systemctl stop gitea.service
-systemctl disable gitea.service
+systemctl stop ${GITEA_SYSTEMD_SERVICEFILE}
+systemctl disable ${GITEA_SYSTEMD_SERVICEFILE}
 
 
-# TODO: Backup /home/git
-# TODO: Backup database
-# TODO: Backup /var/lib/gitea
-# TODO: Backup /etc/gitea
+# TODO: Backup /home/${GITEA_USER}
+# TODO: Backup ${GITEA_DBNAME} database
+# TODO: Backup ${GITEA_WORKINGDIR}
+# TODO: Backup ${GITEA_CONFIGDIR}
 
 
 # delete database and role
-sql DROP DATABASE gitea 
+sql DROP DATABASE ${GITEA_DBNAME} 
 sql DROP ROLE ${GITEA_USER} 
 
 
@@ -35,12 +35,12 @@ rmdir ${GITEA_WORKINGDIR}
 rm -rf ${GITEA_CONFIGDIR}
 
 
-# delete gitea binary
-rm /usr/local/bin/gitea
+# delete binary
+rm ${GITEA_BIN}
 
 
-# delete gitea binary autocompletion
-rm /usr/share/bash-completion/completions/gitea
+# delete autocompletion
+rm /home/${GITEA_USER}/share/bash-completion/completions/gitea
 
 
 # delete systemd service and socket
@@ -56,10 +56,10 @@ service nginx start
 
 
 # delete certbot
-certbot delete --cert-name ayot.net
+certbot delete --cert-name ${GITEA_DOMAIN}
 
 
-# Delete the gitea user
+# Delete the user
 if [ -n "$(grep -P "^${GITEA_USER}" /etc/passwd)" ]; then
   deluser \
      --system \

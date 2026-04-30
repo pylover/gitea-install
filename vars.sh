@@ -6,8 +6,9 @@ DLDIR=${HERE}/dl
 
 
 # Gitea
-GITEA_VERSION=1.22.4
+GITEA_VERSION=1.26.1
 GITEA_DLBASEURL=https://dl.gitea.com/gitea
+GITEA_BASHAUTOCOMPLETIONSCRIPT=https://raw.githubusercontent.com/go-gitea/gitea/main/contrib/autocompletion/bash_autocomplete
 GITEA_BINFILE_NAME="gitea-${GITEA_VERSION}-${OS}-${ARCH}"
 GITEA_BINFILE_LOCAL=${DLDIR}/${GITEA_BINFILE_NAME}
 GITEA_BINFILE_VERIFY=yes
@@ -15,17 +16,17 @@ GITEA_DLURL="${GITEA_DLBASEURL}/${GITEA_VERSION}/${GITEA_BINFILE_NAME}"
 GITEA_BINFILE_CHKSUMFILE=${DLDIR}/${GITEA_BINFILE_NAME}.asc
 GITEA_GPGKEYID=7C9E68152594688862D62AF62D9AE806EC1592E2
 GITEA_GPGKEYSERVER=keys.openpgp.org
-GITEA_WORKINGDIR=/var/lib/gitea
-GITEA_CONFIGDIR=/etc/gitea
-GITEA_CONFIGFILE=${GITEA_CONFIGDIR}/app.ini
-GITEA_BASHAUTOCOMPLETIONSCRIPT=https://raw.githubusercontent.com/go-gitea/gitea/main/contrib/autocompletion/bash_autocomplete
 GITEA_USER=git
+GITEA_WORKINGDIR=/home/${GITEA_USER}/.var
+GITEA_CONFIGDIR=/home/${GITEA_USER}/.config
+GITEA_CONFIGFILE=${GITEA_CONFIGDIR}/gitea.ini
+GITEA_DBNAME=gitea
 GITEA_DBPASS=gitea
-GITEA_BIN=/usr/local/bin/gitea
+GITEA_BIN=/home/${GITEA_USER}/bin/gitea
 
 
 # Systemd
-GITEA_SYSTEMD_SERVICEFILE=/etc/systemd/system/gitea.service
+GITEA_SYSTEMD_SERVICEFILE=${GITEA_CONFIGDIR}/systemd/user/gitea.service
 
 
 # Nginx
